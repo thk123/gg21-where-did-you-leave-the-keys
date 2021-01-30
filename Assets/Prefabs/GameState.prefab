@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeySpawnPositions: []
-  KeyPrefab: {fileID: 7080472108162762155, guid: f15230b3d1252f544a6172abcb61319a, type: 3}
+  KeyPrefab: {fileID: 170560, guid: cc5de5e674870ca479a40105f80555ad, type: 3}

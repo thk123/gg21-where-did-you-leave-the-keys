@@ -79,6 +79,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  HoldMaterial: {fileID: 2100000, guid: 59b2f633ed8a2f047812e23af6365fd4, type: 2}
 --- !u!1 &697839884471050173
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +95,7 @@ GameObject:
   - component: {fileID: 697839883360667379}
   - component: {fileID: 697839883360667378}
   m_Layer: 0
-  m_Name: RigidBodyFPSController
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,14 +108,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697839884471050173}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 2.062, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 697839884470616987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!54 &697839884465667291
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -363,8 +364,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 697839884469018011}
   motionBob:
-    HorizontalBobRange: 0.1
-    VerticalBobRange: 0.05
+    HorizontalBobRange: 0
+    VerticalBobRange: 0
     Bobcurve:
       serializedVersion: 2
       m_Curve:

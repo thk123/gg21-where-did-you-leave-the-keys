@@ -36,6 +36,7 @@ public class Grabber : MonoBehaviour
     public float DeadDistance = 1.0f;
     public Vector3 HandOffset;
     public AnimationCurve ForceCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 100.0f);
+    public float GrabForceMuliplier = 1.0f;
 
     public Material HoldMaterial;
     // Start is called before the first frame update
@@ -76,7 +77,7 @@ public class Grabber : MonoBehaviour
                 float range = MaxDistance - DeadDistance;
                 // 1 = max distance,  0 = dead distance
                 float t = Mathf.Lerp(0.0f, 1.0f, (dist2 - DeadDistance) / range);
-                float forceStrengt = ForceCurve.Evaluate(t);
+                float forceStrengt = ForceCurve.Evaluate(t) * GrabForceMuliplier;
                 GrabbedItem.AddForce(pullDirection.normalized * forceStrengt);
             }
         }

@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: DoorToUnlock
       value: 
       objectReference: {fileID: 9221573837928359075}
+    - target: {fileID: 412803226779447731, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
+      propertyPath: UIController
+      value: 
+      objectReference: {fileID: 8265543351123606836}
     - target: {fileID: 5402642109409378456, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -510,3 +514,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4969032807208499062, guid: 136d5b90580f2714da0d5821c93b6647, type: 3}
   m_PrefabInstance: {fileID: 8895664046041252546}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8265543351123606836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 704431480550506486, guid: 136d5b90580f2714da0d5821c93b6647, type: 3}
+  m_PrefabInstance: {fileID: 8895664046041252546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fecf4bb9a918ee46b1c02202f346679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

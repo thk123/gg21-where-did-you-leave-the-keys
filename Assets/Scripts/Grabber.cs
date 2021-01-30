@@ -4,11 +4,40 @@ using UnityEngine;
 
 public class Grabber : MonoBehaviour
 {
+    struct SavedProperties
+    {
+        float Drag;
+        Material Material;
+        bool UseGravity;
+        bool FreezeRotation;
+
+        public SavedProperties(Rigidbody body)
+        {
+            Drag = body.drag;
+            UseGravity = body.useGravity;
+            Material = body.gameObject.GetComponent<MeshRenderer>()?.material;
+            FreezeRotation = body.freezeRotation;
+        }
+
+        public void Restor(Rigidbody body)
+        {
+            body.drag = Drag;
+            body.useGravity = UseGravity;
+            body.freezeRotation = FreezeRotation;
+            if (body.gameObject.GetComponent<MeshRenderer>())
+            {
+                body.gameObject.GetComponent<MeshRenderer>().material = Material;
+            }
+        }
+    }
+
     Rigidbody GrabbedItem;
     public float MaxDistance = 100.0f;
     public float DeadDistance = 1.0f;
     public Vector3 HandOffset;
     public AnimationCurve ForceCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 100.0f);
+
+    public Material HoldMaterial;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,13 +100,11 @@ public class Grabber : MonoBehaviour
         
     }
 
-    float oldDrag;
+    SavedProperties? savedProps = null;
 
     private void Drop()
     {
-        GrabbedItem.drag = oldDrag;
-        GrabbedItem.freezeRotation = false;
-        GrabbedItem.useGravity = true;
+        savedProps.Value.Restor(GrabbedItem);
         GrabbedItem = null;
     }
 
@@ -85,9 +112,10 @@ public class Grabber : MonoBehaviour
     private void Grab(Rigidbody itemToGrab)
     {
         GrabbedItem = itemToGrab;
+        savedProps = new Grabber.SavedProperties(itemToGrab);
+        GrabbedItem.gameObject.GetComponent<MeshRenderer>().material = HoldMaterial;
         GrabbedItem.useGravity = false;
         GrabbedItem.freezeRotation = true;
-        oldDrag = GrabbedItem.drag;
         GrabbedItem.drag = 10.0f;
     }
 

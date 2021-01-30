@@ -1602,10 +1602,6 @@ PrefabInstance:
       value: GameState
       objectReference: {fileID: 0}
     - target: {fileID: 5402642109409378459, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
-      propertyPath: KeySpawnPositions.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5402642109409378459, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
       propertyPath: KeySpawnPositions.Array.data[0]
       value: 
       objectReference: {fileID: 1928000280}

@@ -17,7 +17,6 @@ public class KeySpawnSystem : MonoBehaviour
         Debug.Assert(KeyPrefab != null, "No key prefab set");
 
         RemainingSpots = new Queue<GameObject>(Shuffle(KeySpawnPositions));
-        SpawnNextKey();
     }
 
     // Update is called once per frame

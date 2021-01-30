@@ -15,6 +15,10 @@ public class GameState : MonoBehaviour
     private int DoorsUnlocked;
     private float LevelStartTime;
 
+   // public CentralDoor CentralDoor;
+   public GameObject CentralDoor;
+    public int KeysForCentralDoor = 3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,7 @@ public class GameState : MonoBehaviour
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
         DoorsUnlocked = 0;
         LevelStartTime = Time.time;
+        CentralDoor.SetActive(true);
         StartCoroutine(GameSequence());
     }
 
@@ -80,6 +85,14 @@ public class GameState : MonoBehaviour
         UIController.ShowSuccess(Time.time - timeStartedKey);
         DoorToUnlock.Lock();
         MusicManager.SetMusicIntensity(0);
+
+
+        Debug.Log(DoorsUnlocked);
+        if (DoorsUnlocked == KeysForCentralDoor) {
+           // CentralDoor.isUnlocked();
+           CentralDoor.SetActive(false);
+        }
+
     }
 
     IEnumerator WaitUntil(Func<bool> condition, float timeout)

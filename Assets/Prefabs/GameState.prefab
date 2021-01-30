@@ -47,6 +47,15 @@ MonoBehaviour:
   KeySpawnPositions:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   KeyPrefab: {fileID: 170560, guid: cc5de5e674870ca479a40105f80555ad, type: 3}
 --- !u!114 &412803226779447731
 MonoBehaviour:
@@ -63,3 +72,4 @@ MonoBehaviour:
   DoorKnock: {fileID: 0}
   Timeout: 30
   DoorToUnlock: {fileID: 0}
+  UIController: {fileID: 0}

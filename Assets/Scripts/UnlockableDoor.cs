@@ -6,6 +6,7 @@ using UnityEngine;
 public class UnlockableDoor : MonoBehaviour
 {
     AudioSource UnlockEffect;
+    public DoorHinger Hinge;
 
     public bool IsUnlocked
 
@@ -45,5 +46,6 @@ public class UnlockableDoor : MonoBehaviour
     {
         IsUnlocked = true;
         UnlockEffect.Play();
+        StartCoroutine(Hinge.DoDoorSwing(0.5f));
     }
 }

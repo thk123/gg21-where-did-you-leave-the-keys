@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour
 
     public void ShowSuccess(float timeTaken)
     {
-        SuccessElements.TimeTextBox.text = timeTaken.ToString("1.0s");
+        SuccessElements.TimeTextBox.text = timeTaken.ToString(".0s");
         StartCoroutine(ShowSuccess_Coroutine());
     }
 

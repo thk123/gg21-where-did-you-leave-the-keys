@@ -406,6 +406,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8067886867832849103}
     m_Modifications:
+    - target: {fileID: 352272894686977586, guid: 3e0b5b67f0186aa4d9a3e9f84b0fa4bc, type: 3}
+      propertyPath: Hinge
+      value: 
+      objectReference: {fileID: 7930858673683313176}
     - target: {fileID: 3557234393715977810, guid: 3e0b5b67f0186aa4d9a3e9f84b0fa4bc, type: 3}
       propertyPath: m_RootOrder
       value: 1

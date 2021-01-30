@@ -25,18 +25,15 @@ public class DoorHinger : MonoBehaviour
     {
         t = 0.0f;
         DoorState = State.Closed;
-        StartCoroutine(TestDoor());
     }
 
-    IEnumerator TestDoor()
+    public IEnumerator DoDoorSwing(float pauseTime)
     {
-        while (true)
-        {
-            ToggleDoor();
-            yield return new WaitUntil(() => DoorState == State.Open);
-            ToggleDoor();
-            yield return new WaitUntil(() => DoorState == State.Closed);
-        }
+        ToggleDoor();
+        yield return new WaitUntil(() => DoorState == State.Open);
+        yield return new WaitForSeconds(pauseTime);
+        ToggleDoor();
+        yield return new WaitUntil(() => DoorState == State.Closed);
     }
 
     public void ToggleDoor()

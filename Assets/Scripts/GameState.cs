@@ -10,9 +10,10 @@ public class GameState : MonoBehaviour
     public float Timeout = 60.0f;
     public UnlockableDoor DoorToUnlock;
     public UIController UIController;
+    public MusicManager MusicManager;
 
     private int DoorsUnlocked;
-    private float StartTime;
+    private float LevelStartTime;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class GameState : MonoBehaviour
         Debug.Assert(UIController != null, "No UI Controller set");
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
         DoorsUnlocked = 0;
-        StartTime = Time.time;
+        LevelStartTime = Time.time;
         StartCoroutine(GameSequence());
     }
 
@@ -39,21 +40,44 @@ public class GameState : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
             DoorKnock.Play();
-            float timeStarted = Time.time;
-            yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout);
+            float timeStartedKey = Time.time;
+            yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
             if (DoorToUnlock.IsUnlocked)
             {
-                ++DoorsUnlocked;
-                UIController.ShowSuccess(Time.time - timeStarted);
-                DoorToUnlock.Lock();
+                CompleteKey(timeStartedKey);
+                continue;
+            }
+            DoorKnock.Play();
+            MusicManager.SetMusicIntensity(1);
+            yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
+            if (DoorToUnlock.IsUnlocked)
+            {
+                CompleteKey(timeStartedKey);
+                continue;
+            }
+            DoorKnock.Play();
+            MusicManager.SetMusicIntensity(2);
+            yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
+            if (DoorToUnlock.IsUnlocked)
+            {
+                CompleteKey(timeStartedKey);
+                continue;
             }
             else
             {
-                UIController.ShowFailure(DoorsUnlocked, Time.time - StartTime);
+                UIController.ShowFailure(DoorsUnlocked, Time.time - LevelStartTime);
             }
         }
-        UIController.ShowCompletion(DoorsUnlocked, Time.time - StartTime);
+        UIController.ShowCompletion(DoorsUnlocked, Time.time - LevelStartTime);
 
+    }
+
+    private void CompleteKey(float timeStartedKey)
+    {
+        ++DoorsUnlocked;
+        UIController.ShowSuccess(Time.time - timeStartedKey);
+        DoorToUnlock.Lock();
+        MusicManager.SetMusicIntensity(0);
     }
 
     IEnumerator WaitUntil(Func<bool> condition, float timeout)

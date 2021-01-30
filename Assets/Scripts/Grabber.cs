@@ -117,6 +117,8 @@ public class Grabber : MonoBehaviour
         GrabbedItem.useGravity = false;
         GrabbedItem.freezeRotation = true;
         GrabbedItem.drag = 10.0f;
+
+        itemToGrab.GetComponent<PickupableSFX>()?.PickUp();
     }
 
     bool IsGrabbing()

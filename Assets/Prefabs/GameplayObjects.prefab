@@ -239,8 +239,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 104826428540831487}
     m_Modifications:
+    - target: {fileID: 697839883360667379, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 697839884457548827, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
       propertyPath: m_Height
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 697839884457548827, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 697839884459797087, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+      propertyPath: movementSettings.StrafeSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 697839884459797087, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+      propertyPath: advancedSettings.slowDownRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 697839884459797087, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+      propertyPath: movementSettings.ForwardSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 697839884459797087, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+      propertyPath: movementSettings.BackwardSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 697839884459797087, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+      propertyPath: movementSettings.RunMultiplier
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 697839884470616985, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
@@ -436,6 +464,10 @@ PrefabInstance:
     - target: {fileID: 5402642109409378458, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
       propertyPath: m_Name
       value: GameState
+      objectReference: {fileID: 0}
+    - target: {fileID: 5402642109409378459, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
+      propertyPath: KeySpawnPositions.Array.size
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5402642109409378459, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
       propertyPath: KeySpawnPositions.Array.data[0]

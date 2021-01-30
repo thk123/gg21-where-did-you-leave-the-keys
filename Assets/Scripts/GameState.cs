@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
-    public AudioSource DoorKnock;
+    public DoorKnocker DoorKnock;
     KeySpawnSystem KeySpawnSystem;
     public float Timeout = 60.0f;
     public UnlockableDoor DoorToUnlock;
@@ -39,7 +39,7 @@ public class GameState : MonoBehaviour
         {
             yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
-            DoorKnock.Play();
+            DoorKnock.Knock(0);
             float timeStartedKey = Time.time;
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
             if (DoorToUnlock.IsUnlocked)
@@ -47,7 +47,7 @@ public class GameState : MonoBehaviour
                 CompleteKey(timeStartedKey);
                 continue;
             }
-            DoorKnock.Play();
+            DoorKnock.Knock(1);
             MusicManager.SetMusicIntensity(1);
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
             if (DoorToUnlock.IsUnlocked)
@@ -55,7 +55,7 @@ public class GameState : MonoBehaviour
                 CompleteKey(timeStartedKey);
                 continue;
             }
-            DoorKnock.Play();
+            DoorKnock.Knock(2);
             MusicManager.SetMusicIntensity(2);
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
             if (DoorToUnlock.IsUnlocked)
@@ -65,7 +65,9 @@ public class GameState : MonoBehaviour
             }
             else
             {
+                MusicManager.SetMusicIntensity(0);
                 UIController.ShowFailure(DoorsUnlocked, Time.time - LevelStartTime);
+                yield break;
             }
         }
         UIController.ShowCompletion(DoorsUnlocked, Time.time - LevelStartTime);

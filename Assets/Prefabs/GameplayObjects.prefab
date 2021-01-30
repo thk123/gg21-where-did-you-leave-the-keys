@@ -114,6 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8870431935026388165}
   - component: {fileID: 8870431935026388164}
+  - component: {fileID: 530839620284325742}
   m_Layer: 0
   m_Name: DoorKnock
   m_TagString: Untagged
@@ -145,7 +146,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0d40242d5435bd046b89061ccd34a288, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -231,6 +232,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &530839620284325742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870431935026388162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65a61bcdf5f27d4abaa63044559569f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knocks:
+  - {fileID: 8300000, guid: 6a8f318efd4b28442948cb7d9a0415dc, type: 3}
+  - {fileID: 8300000, guid: 0d40242d5435bd046b89061ccd34a288, type: 3}
+  - {fileID: 8300000, guid: 49400e0cbba05864e850fe4bb13a2a7b, type: 3}
 --- !u!1001 &8068667254923392527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,7 +509,7 @@ PrefabInstance:
     - target: {fileID: 412803226779447731, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
       propertyPath: DoorKnock
       value: 
-      objectReference: {fileID: 8870431935026388164}
+      objectReference: {fileID: 530839620284325742}
     - target: {fileID: 412803226779447731, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
       propertyPath: DoorToUnlock
       value: 

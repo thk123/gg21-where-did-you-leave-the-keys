@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5402642109409378456}
   - component: {fileID: 5402642109409378459}
+  - component: {fileID: 412803226779447731}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -45,3 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KeySpawnPositions: []
   KeyPrefab: {fileID: 170560, guid: cc5de5e674870ca479a40105f80555ad, type: 3}
+--- !u!114 &412803226779447731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402642109409378458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a1f09c1615b62408cf5c27694c9275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoorKnock: {fileID: 0}
+  DoorToUnlock: {fileID: 0}

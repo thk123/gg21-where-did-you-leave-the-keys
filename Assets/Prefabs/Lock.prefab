@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3557234393715977810}
   - component: {fileID: 2378768849955788132}
   - component: {fileID: 1868648452}
+  - component: {fileID: 352272894686977586}
   m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
@@ -40,7 +41,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6830968794564486098}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
@@ -141,3 +142,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &352272894686977586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830968794564486098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d62da475dca4584da2972d120d47007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

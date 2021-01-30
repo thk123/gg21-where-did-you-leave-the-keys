@@ -11,12 +11,17 @@ public class GameState : MonoBehaviour
     public UnlockableDoor DoorToUnlock;
     public UIController UIController;
 
+    private int DoorsUnlocked;
+    private float StartTime;
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(DoorKnock != null, "No door knock set");
         Debug.Assert(UIController != null, "No UI Controller set");
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
+        DoorsUnlocked = 0;
+        StartTime = Time.time;
         StartCoroutine(GameSequence());
     }
 
@@ -38,15 +43,16 @@ public class GameState : MonoBehaviour
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout);
             if (DoorToUnlock.IsUnlocked)
             {
+                ++DoorsUnlocked;
                 UIController.ShowSuccess(Time.time - timeStarted);
                 DoorToUnlock.Lock();
             }
             else
             {
-                Debug.Log("Fail");
+                UIController.ShowFailure(DoorsUnlocked, Time.time - StartTime);
             }
         }
-        Debug.Log("Complete");
+        UIController.ShowCompletion(DoorsUnlocked, Time.time - StartTime);
 
     }
 

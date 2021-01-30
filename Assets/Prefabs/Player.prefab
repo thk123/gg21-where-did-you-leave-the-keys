@@ -79,6 +79,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  GrabForceMuliplier: 5
   HoldMaterial: {fileID: 2100000, guid: 59b2f633ed8a2f047812e23af6365fd4, type: 2}
 --- !u!1 &697839884471050173
 GameObject:
@@ -161,9 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 697839884469018011}
   movementSettings:
-    ForwardSpeed: 8
-    BackwardSpeed: 4
-    StrafeSpeed: 4
+    ForwardSpeed: 300
+    BackwardSpeed: 150
+    StrafeSpeed: 150
     RunMultiplier: 2
     RunKey: 304
     JumpForce: 50
@@ -200,7 +201,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    CurrentTargetSpeed: 8
+    CurrentTargetSpeed: 150
   mouseLook:
     XSensitivity: 2
     YSensitivity: 2
@@ -213,7 +214,7 @@ MonoBehaviour:
   advancedSettings:
     groundCheckDistance: 0.1
     stickToGroundHelperDistance: 0.6
-    slowDownRate: 20
+    slowDownRate: 40
     airControl: 0
     shellOffset: 0
 --- !u!23 &697839883360667379

@@ -9,11 +9,13 @@ public class GameState : MonoBehaviour
     KeySpawnSystem KeySpawnSystem;
     public float Timeout = 60.0f;
     public UnlockableDoor DoorToUnlock;
+    public UIController UIController;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(DoorKnock != null, "No door knock set");
+        Debug.Assert(UIController != null, "No UI Controller set");
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
         StartCoroutine(GameSequence());
     }
@@ -32,14 +34,12 @@ public class GameState : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
             DoorKnock.Play();
+            float timeStarted = Time.time;
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout);
             if (DoorToUnlock.IsUnlocked)
             {
+                UIController.ShowSuccess(Time.time - timeStarted);
                 DoorToUnlock.Lock();
-                if (KeySpawnSystem.AnyMoreKeys)
-                {
-                    
-                }
             }
             else
             {

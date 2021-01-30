@@ -29,6 +29,7 @@ public class GameState : MonoBehaviour
         yield return null;
         while (KeySpawnSystem.AnyMoreKeys)
         {
+            yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
             DoorKnock.Play();
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout);
@@ -37,7 +38,7 @@ public class GameState : MonoBehaviour
                 DoorToUnlock.Lock();
                 if (KeySpawnSystem.AnyMoreKeys)
                 {
-                    yield return new WaitForSeconds(2.0f);
+                    
                 }
             }
             else

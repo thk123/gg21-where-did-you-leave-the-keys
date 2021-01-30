@@ -16,8 +16,12 @@ public class GameState : MonoBehaviour
     private float LevelStartTime;
 
    // public CentralDoor CentralDoor;
-   public GameObject CentralDoor;
+    public GameObject CentralDoor;
     public int KeysForCentralDoor = 3;
+
+    public Transform[] DifficultyObjects;
+    public int[] DifficultyThresholds;
+    int CurrentDifficulty = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +30,16 @@ public class GameState : MonoBehaviour
         Debug.Assert(UIController != null, "No UI Controller set");
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
         DoorsUnlocked = 0;
+        CurrentDifficulty = 0;
         LevelStartTime = Time.time;
         CentralDoor.SetActive(true);
+
+        for (int i=0; i < DifficultyObjects.Length; i++) {
+            foreach (Transform SomeObject in DifficultyObjects[i]) {
+                SomeObject.gameObject.SetActive(false);
+            }
+        }
+
         StartCoroutine(GameSequence());
     }
 
@@ -87,10 +99,19 @@ public class GameState : MonoBehaviour
         MusicManager.SetMusicIntensity(0);
 
 
-        Debug.Log(DoorsUnlocked);
+       // Debug.Log(DoorsUnlocked);
         if (DoorsUnlocked == KeysForCentralDoor) {
            // CentralDoor.isUnlocked();
            CentralDoor.SetActive(false);
+        }
+
+        if (DoorsUnlocked >= DifficultyThresholds[CurrentDifficulty]) {
+            //move up a difficulty and unlock stuff
+            CurrentDifficulty++;
+            foreach (Transform SomeObject in DifficultyObjects[CurrentDifficulty]) {
+                SomeObject.gameObject.SetActive(true);
+            }
+
         }
 
     }

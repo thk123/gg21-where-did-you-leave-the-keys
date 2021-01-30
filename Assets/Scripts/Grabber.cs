@@ -15,7 +15,7 @@ public class Grabber : MonoBehaviour
         {
             Drag = body.drag;
             UseGravity = body.useGravity;
-            Material = body.gameObject.GetComponent<MeshRenderer>()?.material;
+            Material = body.gameObject.GetComponentInChildren<MeshRenderer>()?.material;
             FreezeRotation = body.freezeRotation;
         }
 
@@ -24,9 +24,9 @@ public class Grabber : MonoBehaviour
             body.drag = Drag;
             body.useGravity = UseGravity;
             body.freezeRotation = FreezeRotation;
-            if (body.gameObject.GetComponent<MeshRenderer>())
+            if (body.gameObject.GetComponentInChildren<MeshRenderer>() != null)
             {
-                body.gameObject.GetComponent<MeshRenderer>().material = Material;
+                body.gameObject.GetComponentInChildren<MeshRenderer>().material = Material;
             }
         }
     }
@@ -113,7 +113,7 @@ public class Grabber : MonoBehaviour
     {
         GrabbedItem = itemToGrab;
         savedProps = new Grabber.SavedProperties(itemToGrab);
-        GrabbedItem.gameObject.GetComponent<MeshRenderer>().material = HoldMaterial;
+        GrabbedItem.gameObject.GetComponentInChildren<MeshRenderer>().material = HoldMaterial;
         GrabbedItem.useGravity = false;
         GrabbedItem.freezeRotation = true;
         GrabbedItem.drag = 10.0f;

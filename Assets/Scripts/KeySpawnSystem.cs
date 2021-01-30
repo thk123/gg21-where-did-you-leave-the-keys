@@ -26,6 +26,11 @@ public class KeySpawnSystem : MonoBehaviour
         
     }
 
+    public bool AnyMoreKeys
+    {
+        get => RemainingSpots.Any();
+    }
+
     public void SpawnNextKey()
     {
         NextKey = GameObject.Instantiate(KeyPrefab, RemainingSpots.Dequeue().transform);

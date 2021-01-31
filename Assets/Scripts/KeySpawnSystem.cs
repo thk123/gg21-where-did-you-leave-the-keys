@@ -9,6 +9,7 @@ public class KeySpawnSystem : MonoBehaviour
     public GameObject KeyPrefab;
 
     public Queue<GameObject> RemainingSpots;
+    Transform LastSpawnPoint;
     GameObject NextKey;
 
     // Start is called before the first frame update
@@ -23,7 +24,12 @@ public class KeySpawnSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(NextKey != null && NextKey.transform.position.y < -10.0f)
+        {
+            // Respawn the key
+            GameObject.Destroy(NextKey);
+            NextKey = GameObject.Instantiate(KeyPrefab, LastSpawnPoint);
+        }
     }
 
     public bool AnyMoreKeys
@@ -33,7 +39,8 @@ public class KeySpawnSystem : MonoBehaviour
 
     public void SpawnNextKey()
     {
-        NextKey = GameObject.Instantiate(KeyPrefab, RemainingSpots.Dequeue().transform);
+        LastSpawnPoint = RemainingSpots.Dequeue().transform;
+        NextKey = GameObject.Instantiate(KeyPrefab, LastSpawnPoint);
     }
 
     private IEnumerable<GameObject> Shuffle(List<GameObject> objects)

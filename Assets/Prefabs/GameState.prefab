@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5402642109409378456}
   - component: {fileID: 5402642109409378459}
   - component: {fileID: 412803226779447731}
+  - component: {fileID: 5148633324181658890}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -73,3 +74,25 @@ MonoBehaviour:
   Timeout: 30
   DoorToUnlock: {fileID: 0}
   UIController: {fileID: 0}
+  Fade: {fileID: 0}
+  MusicManager: {fileID: 0}
+  Player: {fileID: 0}
+  CentralDoor: {fileID: 0}
+  KeysForCentralDoor: 3
+  DifficultyObjects: []
+  DifficultyThresholds: 
+--- !u!114 &5148633324181658890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402642109409378458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e149b3f62dd9ca5439723ad82b56157c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GenericSound: {fileID: 8300000, guid: d493c8da0a943444f8ad0a6003553c84, type: 3}
+  CardboardSound: {fileID: 8300000, guid: e8fe0ce4c04268b4d8ca255b291d8686, type: 3}
+  GlassSound: {fileID: 8300000, guid: ab785125613274424bf9b8ab3faa0010, type: 3}

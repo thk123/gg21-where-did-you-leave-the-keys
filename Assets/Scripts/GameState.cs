@@ -14,6 +14,8 @@ public class GameState : MonoBehaviour
     public Fade Fade;
     public MusicManager MusicManager;
     public RigidbodyFirstPersonController Player;
+    public AudioClip MotorbikeAway;
+    public AudioClip MotorbikeArrived;
 
     private int DoorsUnlocked;
     private float LevelStartTime;
@@ -32,6 +34,7 @@ public class GameState : MonoBehaviour
         Debug.Assert(DoorKnock != null, "No door knock set");
         Debug.Assert(UIController != null, "No UI Controller set");
         Debug.Assert(Player != null, "No player set");
+        Debug.Assert(MotorbikeAway != null, "No motorbike away sound");
 
         Fade = Fade ?? UIController.GetComponent<Fade>();
         Debug.Assert(Fade != null, "Could not find fade component");
@@ -67,6 +70,7 @@ public class GameState : MonoBehaviour
         while (KeySpawnSystem.AnyMoreKeys)
         {            
             KeySpawnSystem.SpawnNextKey();
+            AudioSource.PlayClipAtPoint(MotorbikeArrived, DoorKnock.transform.position);
             DoorKnock.Knock(0);
             float timeStartedKey = Time.time;
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
@@ -103,6 +107,10 @@ public class GameState : MonoBehaviour
 
     private void ShowEndScreen(bool win, int doors, float time)
     {
+        if(!win)
+        {
+            AudioSource.PlayClipAtPoint(MotorbikeAway, Camera.main.transform.position);
+        }
         MusicManager.SetMusicIntensity(0);
         Player.mouseLook.SetCursorLock(false);
         Player.enabled = false;
@@ -135,7 +143,6 @@ public class GameState : MonoBehaviour
 
         yield return Fade.FadeToClear(1.0f);
         yield return new WaitForSeconds(1.0f);
-
     }
 
     IEnumerator WaitUntil(Func<bool> condition, float timeout)

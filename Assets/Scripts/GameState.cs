@@ -66,7 +66,6 @@ public class GameState : MonoBehaviour
         Player.enabled = true;
         while (KeySpawnSystem.AnyMoreKeys)
         {            
-            yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
             DoorKnock.Knock(0);
             float timeStartedKey = Time.time;
@@ -127,7 +126,7 @@ public class GameState : MonoBehaviour
 
         if (DoorsUnlocked >= DifficultyThresholds[CurrentDifficulty]) {
             //move up a difficulty and unlock stuff
-            CurrentDifficulty++;
+            CurrentDifficulty = Mathf.Clamp(CurrentDifficulty + 1, 0, DifficultyObjects.Length - 1);
             foreach (Transform SomeObject in DifficultyObjects[CurrentDifficulty]) {
                 SomeObject.gameObject.SetActive(true);
             }
@@ -135,6 +134,7 @@ public class GameState : MonoBehaviour
         }
 
         yield return Fade.FadeToClear(1.0f);
+        yield return new WaitForSeconds(1.0f);
 
     }
 

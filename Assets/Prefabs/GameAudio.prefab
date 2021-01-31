@@ -141,6 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicPieces:
-  - {fileID: 8300000, guid: 791daa98e93401f4bb07fd9f7f3a515f, type: 3}
-  - {fileID: 8300000, guid: a991b322297494043b471a8733bd916e, type: 3}
-  - {fileID: 8300000, guid: f4af248f86c2f144d8957b6f975e7fe6, type: 3}
+  - {fileID: 8300000, guid: 54307b1caee1457499808f8a9d7eb92c, type: 3}
+  - {fileID: 8300000, guid: 214bf5b606e95d140bbbeec58db1acc5, type: 3}
+  - {fileID: 8300000, guid: 257ae0b2b36bfc44fa12e1f3dcd78e06, type: 3}

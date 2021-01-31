@@ -111,6 +111,7 @@ public class Grabber : MonoBehaviour
     private void Drop()
     {
         savedProps.Value.Restor(GrabbedItem);
+        GrabbedItem.GetComponent<Key>()?.SetProximityMute(false);
         GrabbedItem = null;
     }
 
@@ -125,6 +126,7 @@ public class Grabber : MonoBehaviour
         GrabbedItem.drag = 10.0f;
 
         itemToGrab.GetComponent<PickupableSFX>()?.PickUp();
+        itemToGrab.GetComponent<Key>()?.SetProximityMute(true);
     }
 
     bool IsGrabbing()

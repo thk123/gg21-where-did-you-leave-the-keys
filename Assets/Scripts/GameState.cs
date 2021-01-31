@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour
     public float Timeout = 60.0f;
     public UnlockableDoor DoorToUnlock;
     public UIController UIController;
+    public Fade Fade;
     public MusicManager MusicManager;
     public RigidbodyFirstPersonController Player;
 
@@ -31,6 +32,10 @@ public class GameState : MonoBehaviour
         Debug.Assert(DoorKnock != null, "No door knock set");
         Debug.Assert(UIController != null, "No UI Controller set");
         Debug.Assert(Player != null, "No player set");
+
+        Fade = Fade ?? UIController.GetComponent<Fade>();
+        Debug.Assert(Fade != null, "Could not find fade component");
+
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
         DoorsUnlocked = 0;
         CurrentDifficulty = 0;
@@ -68,7 +73,7 @@ public class GameState : MonoBehaviour
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
             if (DoorToUnlock.IsUnlocked)
             {
-                CompleteKey(timeStartedKey);
+                yield return CompleteKey(timeStartedKey);
                 continue;
             }
             DoorKnock.Knock(1);
@@ -76,7 +81,7 @@ public class GameState : MonoBehaviour
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
             if (DoorToUnlock.IsUnlocked)
             {
-                CompleteKey(timeStartedKey);
+                yield return CompleteKey(timeStartedKey);
                 continue;
             }
             DoorKnock.Knock(2);
@@ -84,7 +89,7 @@ public class GameState : MonoBehaviour
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
             if (DoorToUnlock.IsUnlocked)
             {
-                CompleteKey(timeStartedKey);
+                yield return CompleteKey(timeStartedKey);
                 continue;
             }
             else
@@ -105,13 +110,14 @@ public class GameState : MonoBehaviour
         UIController.ShowEndGame(win, doors, time);
     }
 
-    private void CompleteKey(float timeStartedKey)
+    private IEnumerator CompleteKey(float timeStartedKey)
     {
         ++DoorsUnlocked;
-        UIController.ShowSuccess(Time.time - timeStartedKey);
-        DoorToUnlock.Lock();
         MusicManager.SetMusicIntensity(0);
+        yield return UIController.ShowSuccess(Time.time - timeStartedKey);
+        DoorToUnlock.Lock();
 
+        yield return Fade.FadeToBlack(1.0f);
 
        // Debug.Log(DoorsUnlocked);
         if (DoorsUnlocked == KeysForCentralDoor) {
@@ -127,6 +133,8 @@ public class GameState : MonoBehaviour
             }
 
         }
+
+        yield return Fade.FadeToClear(1.0f);
 
     }
 

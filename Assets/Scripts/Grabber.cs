@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Grabber : MonoBehaviour
@@ -7,7 +9,7 @@ public class Grabber : MonoBehaviour
     struct SavedProperties
     {
         float Drag;
-        Material Material;
+        Dictionary<Renderer, Material[]> SavedMaterial;
         bool UseGravity;
         bool FreezeRotation;
 
@@ -15,7 +17,7 @@ public class Grabber : MonoBehaviour
         {
             Drag = body.drag;
             UseGravity = body.useGravity;
-            Material = body.gameObject.GetComponentInChildren<MeshRenderer>()?.material;
+            SavedMaterial = body.GetComponentsInChildren<Renderer>().ToDictionary(r => r, r => r.materials);
             FreezeRotation = body.freezeRotation;
         }
 
@@ -24,10 +26,12 @@ public class Grabber : MonoBehaviour
             body.drag = Drag;
             body.useGravity = UseGravity;
             body.freezeRotation = FreezeRotation;
-            if (body.gameObject.GetComponentInChildren<MeshRenderer>() != null)
+            var materials = SavedMaterial;
+            ApplyToAllRenderers(body, (renderer) =>
             {
-                body.gameObject.GetComponentInChildren<MeshRenderer>().material = Material;
-            }
+                
+                renderer.materials = materials[renderer];
+            });
         }
     }
 
@@ -41,9 +45,11 @@ public class Grabber : MonoBehaviour
     public LayerMask NoGrabLayer;
 
     public Material HoldMaterial;
+    public Material LookAtMaterial;
     // Start is called before the first frame update
     void Start()
     {
+        LookAtMaterial = LookAtMaterial ?? HoldMaterial;
     }
 
     Ray lastRay = new Ray();
@@ -83,27 +89,75 @@ public class Grabber : MonoBehaviour
                 GrabbedItem.AddForce(pullDirection.normalized * forceStrengt);
             }
         }
-        if(Input.GetMouseButtonDown(0))
+
+
+
+
+        if (!IsGrabbing())
         {
-            if(!IsGrabbing())
+            RaycastHit info;
+            var midpoint = new Vector3(Screen.width / 2, Screen.height / 2, 0.0f);
+            lastRay = Camera.main.ScreenPointToRay(midpoint);
+            if (Physics.Raycast(lastRay, out info, MaxDistance, ~NoGrabLayer))
             {
-                RaycastHit info;
-                var midpoint = new Vector3(Screen.width / 2, Screen.height / 2, 0.0f);
-                lastRay = Camera.main.ScreenPointToRay(midpoint);
-                if (Physics.Raycast(lastRay, out info, MaxDistance, ~NoGrabLayer))
-               //if (Physics.Raycast(lastRay, out info, MaxDistance))
-              // Debug.Log(info.collider);
+                if (info.rigidbody != null && info.collider.gameObject.tag != "NoGrab")
                 {
-                    
-                    if(info.rigidbody != null && info.collider.gameObject.tag != "NoGrab")
+                    if (Input.GetMouseButtonDown(0))
                     {
+                        StopLookingAt();
                         Grab(info.rigidbody);
                     }
+                    else if (CurrentlyLookingAt != info.rigidbody)
+                    {
+
+                        LookAt(info.rigidbody);
+                    }
+                }
+                else
+                {
+                    StopLookingAt();
                 }
             }
+            else
+            {
+                StopLookingAt();
+            }
+        }     
+    }
 
+    Rigidbody CurrentlyLookingAt = null;
+
+    private void LookAt(Rigidbody lookingAt)
+    {
+        StopLookingAt();
+        ApplyToAllRenderers(lookingAt, (renderer) =>
+        {
+            renderer.materials = renderer.materials.Concat(new Material[] { LookAtMaterial }).ToArray();
+        });
+        CurrentlyLookingAt = lookingAt;
+    }
+
+    private void StopLookingAt()
+    {
+        if (CurrentlyLookingAt != null)
+        {
+            ApplyToAllRenderers(CurrentlyLookingAt, (renderer) =>
+            {
+                renderer.materials = renderer.materials.Take(renderer.materials.Length - 1).ToArray();
+            });
+            CurrentlyLookingAt = null;
         }
         
+    }
+
+    private static void ApplyToAllRenderers(Rigidbody rigidBody, Action<Renderer> action)
+    {
+        var renderers = rigidBody.GetComponentsInChildren<Renderer>();
+        foreach (var renderer in renderers)
+        {
+            action(renderer);
+            
+        }
     }
 
     SavedProperties? savedProps = null;
@@ -111,6 +165,7 @@ public class Grabber : MonoBehaviour
     private void Drop()
     {
         savedProps.Value.Restor(GrabbedItem);
+        
         GrabbedItem.GetComponent<Key>()?.SetProximityMute(false);
         GrabbedItem = null;
     }
@@ -120,7 +175,10 @@ public class Grabber : MonoBehaviour
     {
         GrabbedItem = itemToGrab;
         savedProps = new Grabber.SavedProperties(itemToGrab);
-        GrabbedItem.gameObject.GetComponentInChildren<MeshRenderer>().material = HoldMaterial;
+        ApplyToAllRenderers(GrabbedItem, (renderer) =>
+        {
+            renderer.material = HoldMaterial;
+        });
         GrabbedItem.useGravity = false;
         GrabbedItem.freezeRotation = true;
         GrabbedItem.drag = 10.0f;

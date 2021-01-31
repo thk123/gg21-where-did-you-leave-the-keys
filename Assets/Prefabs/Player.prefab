@@ -84,6 +84,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   HoldMaterial: {fileID: 2100000, guid: 59b2f633ed8a2f047812e23af6365fd4, type: 2}
+  LookAtMaterial: {fileID: 2100000, guid: 31c333b234c2acf4b9336a525c3e9c6a, type: 2}
 --- !u!1 &697839884471050173
 GameObject:
   m_ObjectHideFlags: 0

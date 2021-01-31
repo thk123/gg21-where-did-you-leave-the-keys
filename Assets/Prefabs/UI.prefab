@@ -515,7 +515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9032133380649121228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -966,7 +966,7 @@ MonoBehaviour:
     m_LineSpacing: 5
   m_Text: 'Look
 
-    Grab/Let Go
+    Click/hold to grab
 
     Move'
 --- !u!1 &4289144129835099771

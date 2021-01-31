@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameState : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameState : MonoBehaviour
     public UnlockableDoor DoorToUnlock;
     public UIController UIController;
     public MusicManager MusicManager;
+    public RigidbodyFirstPersonController Player;
 
     private int DoorsUnlocked;
     private float LevelStartTime;
@@ -20,6 +22,7 @@ public class GameState : MonoBehaviour
     {
         Debug.Assert(DoorKnock != null, "No door knock set");
         Debug.Assert(UIController != null, "No UI Controller set");
+        Debug.Assert(Player != null, "No player set");
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
         DoorsUnlocked = 0;
         LevelStartTime = Time.time;
@@ -66,13 +69,20 @@ public class GameState : MonoBehaviour
             }
             else
             {
-                MusicManager.SetMusicIntensity(0);
-                UIController.ShowFailure(DoorsUnlocked, Time.time - LevelStartTime);
+
+                ShowEndScreen(false, DoorsUnlocked, Time.time - LevelStartTime);
                 yield break;
             }
         }
-        UIController.ShowCompletion(DoorsUnlocked, Time.time - LevelStartTime);
+        ShowEndScreen(true, DoorsUnlocked, Time.time - LevelStartTime);
+    }
 
+    private void ShowEndScreen(bool win, int doors, float time)
+    {
+        MusicManager.SetMusicIntensity(0);
+        Player.mouseLook.SetCursorLock(false);
+        Player.enabled = false;
+        UIController.ShowEndGame(win, doors, time);
     }
 
     private void CompleteKey(float timeStartedKey)

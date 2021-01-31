@@ -25,9 +25,10 @@ public class MusicManager : MonoBehaviour
     public void SetMusicIntensity(int level)
     {
         level = Mathf.Clamp(level, 0, MusicPieces.Count - 1);
-        float pos = musicPlayer.time;
+        // float pos = musicPlayer.time;
         musicPlayer.clip = MusicPieces[level];
-        musicPlayer.time = pos;
+        
+        // musicPlayer.time = Mathf.Clamp(pos, 0.0f, musicPlayer.clip.length);
         musicPlayer.Play();
     }
 }

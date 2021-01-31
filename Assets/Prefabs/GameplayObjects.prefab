@@ -400,6 +400,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 697839884470616985, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
   m_PrefabInstance: {fileID: 8870431933509327579}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8265551680390148228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 697839884459797087, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
+  m_PrefabInstance: {fileID: 8870431933509327579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c9795a96c094f4cbde4d65546aa9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4006510208050637698 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5513497853886951769, guid: aeedbfde0c5992c45a40d1b1cf28dc40, type: 3}
@@ -490,6 +501,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 104826428540831487}
     m_Modifications:
+    - target: {fileID: 412803226779447731, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 8265551680390148228}
     - target: {fileID: 412803226779447731, guid: 8ff40a6a52f0c2949a91799e17f7b9bd, type: 3}
       propertyPath: DoorKnock
       value: 

@@ -38,7 +38,7 @@ public class UnlockableDoor : MonoBehaviour
         if(other.GetComponent<Key>() != null)
         {
             Unlock();
-            GameObject.Destroy(other);
+            GameObject.Destroy(other.gameObject);
         }
     }
 

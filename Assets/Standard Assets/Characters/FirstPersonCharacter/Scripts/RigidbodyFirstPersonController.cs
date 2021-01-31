@@ -249,7 +249,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                                    ((m_Capsule.height/2f) - m_Capsule.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
                 m_IsGrounded = true;
-                m_GroundContactNormal = hitInfo.normal;
+                //m_GroundContactNormal = hitInfo.normal;
+                m_GroundContactNormal = Vector3.up;
             }
             else
             {

@@ -20,17 +20,27 @@ public struct EndGameElements
     public Text PeopleIn;
 }
 
+[Serializable]
+public struct TutorialElements
+{
+    public MaskableGraphic TextRoot;
+    public MaskableGraphic InstructionsRoot;
+}
+
 public class UIController : MonoBehaviour
 {
     public SuccessElements SuccessElements;
     public EndGameElements EndGameElements;
-    
+    public TutorialElements TutorialElements;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(SuccessElements.RootElement != null, "Success root element must be set");
         Debug.Assert(SuccessElements.TimeTextBox != null, "Time box must be set");
+        Debug.Assert(TutorialElements.InstructionsRoot != null);
+        Debug.Assert(TutorialElements.TextRoot != null);
     }
 
     // Update is called once per frame
@@ -61,8 +71,18 @@ public class UIController : MonoBehaviour
     {
         ShowEndGame(true, doorsUnlocked, totalTime);
     }
+    public IEnumerator ShowTutorial_Iter()
+    {
+        TutorialElements.TextRoot.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        TutorialElements.TextRoot.gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        TutorialElements.InstructionsRoot.gameObject.SetActive(true);
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        TutorialElements.InstructionsRoot.gameObject.SetActive(false);
+    }
 
-    private void ShowEndGame(bool diDWin, int doorsUnlocked, float totalTime)
+    public void ShowEndGame(bool diDWin, int doorsUnlocked, float totalTime)
     {
         EndGameElements.RootElement.gameObject.SetActive(true);
         EndGameElements.Outcome.text = diDWin ? "You Won" : "You Lost";

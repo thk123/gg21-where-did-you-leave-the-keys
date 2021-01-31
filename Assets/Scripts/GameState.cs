@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameState : MonoBehaviour
 {
@@ -11,18 +12,37 @@ public class GameState : MonoBehaviour
     public UnlockableDoor DoorToUnlock;
     public UIController UIController;
     public MusicManager MusicManager;
+    public RigidbodyFirstPersonController Player;
 
     private int DoorsUnlocked;
     private float LevelStartTime;
+
+   // public CentralDoor CentralDoor;
+    public GameObject CentralDoor;
+    public int KeysForCentralDoor = 3;
+
+    public Transform[] DifficultyObjects;
+    public int[] DifficultyThresholds;
+    int CurrentDifficulty = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(DoorKnock != null, "No door knock set");
         Debug.Assert(UIController != null, "No UI Controller set");
+        Debug.Assert(Player != null, "No player set");
         KeySpawnSystem = GetComponent<KeySpawnSystem>();
         DoorsUnlocked = 0;
+        CurrentDifficulty = 0;
         LevelStartTime = Time.time;
+        CentralDoor.SetActive(true);
+
+        for (int i=0; i < DifficultyObjects.Length; i++) {
+            foreach (Transform SomeObject in DifficultyObjects[i]) {
+                SomeObject.gameObject.SetActive(false);
+            }
+        }
+
         StartCoroutine(GameSequence());
     }
 
@@ -35,8 +55,12 @@ public class GameState : MonoBehaviour
     {
         // Skip one frame to ensure the key system is set up
         yield return null;
+        Player.mouseLook.SetCursorLock(true);
+        Player.enabled = false;
+        yield return UIController.ShowTutorial_Iter();
+        Player.enabled = true;
         while (KeySpawnSystem.AnyMoreKeys)
-        {
+        {            
             yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
             DoorKnock.Knock(0);
@@ -65,13 +89,20 @@ public class GameState : MonoBehaviour
             }
             else
             {
-                MusicManager.SetMusicIntensity(0);
-                UIController.ShowFailure(DoorsUnlocked, Time.time - LevelStartTime);
+
+                ShowEndScreen(false, DoorsUnlocked, Time.time - LevelStartTime);
                 yield break;
             }
         }
-        UIController.ShowCompletion(DoorsUnlocked, Time.time - LevelStartTime);
+        ShowEndScreen(true, DoorsUnlocked, Time.time - LevelStartTime);
+    }
 
+    private void ShowEndScreen(bool win, int doors, float time)
+    {
+        MusicManager.SetMusicIntensity(0);
+        Player.mouseLook.SetCursorLock(false);
+        Player.enabled = false;
+        UIController.ShowEndGame(win, doors, time);
     }
 
     private void CompleteKey(float timeStartedKey)
@@ -80,6 +111,23 @@ public class GameState : MonoBehaviour
         UIController.ShowSuccess(Time.time - timeStartedKey);
         DoorToUnlock.Lock();
         MusicManager.SetMusicIntensity(0);
+
+
+       // Debug.Log(DoorsUnlocked);
+        if (DoorsUnlocked == KeysForCentralDoor) {
+           // CentralDoor.isUnlocked();
+           CentralDoor.SetActive(false);
+        }
+
+        if (DoorsUnlocked >= DifficultyThresholds[CurrentDifficulty]) {
+            //move up a difficulty and unlock stuff
+            CurrentDifficulty++;
+            foreach (Transform SomeObject in DifficultyObjects[CurrentDifficulty]) {
+                SomeObject.gameObject.SetActive(true);
+            }
+
+        }
+
     }
 
     IEnumerator WaitUntil(Func<bool> condition, float timeout)

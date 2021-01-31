@@ -90,7 +90,7 @@ public class Grabber : MonoBehaviour
                 if (Physics.Raycast(lastRay, out info, MaxDistance))
                 {
                     
-                    if(info.rigidbody != null)
+                    if(info.rigidbody != null && info.collider.gameObject.tag != "NoGrab")
                     {
                         Grab(info.rigidbody);
                     }

@@ -126,7 +126,7 @@ public class GameState : MonoBehaviour
 
         if (DoorsUnlocked >= DifficultyThresholds[CurrentDifficulty]) {
             //move up a difficulty and unlock stuff
-            CurrentDifficulty++;
+            CurrentDifficulty = Mathf.Clamp(CurrentDifficulty + 1, 0, DifficultyObjects.Length - 1);
             foreach (Transform SomeObject in DifficultyObjects[CurrentDifficulty]) {
                 SomeObject.gameObject.SetActive(true);
             }

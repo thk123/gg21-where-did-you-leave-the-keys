@@ -88,7 +88,8 @@ public class Grabber : MonoBehaviour
             if(!IsGrabbing())
             {
                 RaycastHit info;
-                lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                var midpoint = new Vector3(Screen.width / 2, Screen.height / 2, 0.0f);
+                lastRay = Camera.main.ScreenPointToRay(midpoint);
                 if (Physics.Raycast(lastRay, out info, MaxDistance, ~NoGrabLayer))
                //if (Physics.Raycast(lastRay, out info, MaxDistance))
               // Debug.Log(info.collider);

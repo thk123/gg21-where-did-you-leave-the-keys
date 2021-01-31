@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: OutlineMat
-  m_Shader: {fileID: 4800000, guid: 585d40b079ca45d409c57d1c67744f4a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1a499d1e79b5164429cbf724d04ec2ed, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -26,9 +26,11 @@ Material:
     m_Floats:
     - _Angle: 89
     - _FirstOutlineWidth: 0.006
+    - _Outline: 0.1
     - _SecondOutlineWidth: 0.001
     m_Colors:
-    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Color: {r: 0.23529412, g: 0.49019608, b: 0.81960785, a: 0.5019608}
     - _FirstOutlineColor: {r: 0.23616053, g: 0.4893551, b: 0.8207547, a: 0.5}
+    - _OutlineColor: {r: 0.23529412, g: 0.49019608, b: 0.81960785, a: 0.5019608}
     - _SecondOutlineColor: {r: 0.24417053, g: 0.24417053, b: 0.8773585, a: 1}
   m_BuildTextureStacks: []

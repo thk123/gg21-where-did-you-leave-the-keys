@@ -1719,7 +1719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9124442928419326183, guid: b3e900d8c9b6f934db931736c060a5a8, type: 3}
       propertyPath: Timeout
-      value: 300
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 9124442928419326183, guid: b3e900d8c9b6f934db931736c060a5a8, type: 3}
       propertyPath: CentralDoor

@@ -38,9 +38,12 @@ public class GameState : MonoBehaviour
     {
         // Skip one frame to ensure the key system is set up
         yield return null;
+        Player.mouseLook.SetCursorLock(true);
+        Player.enabled = false;
+        yield return UIController.ShowTutorial_Iter();
+        Player.enabled = true;
         while (KeySpawnSystem.AnyMoreKeys)
-        {
-            yield return UIController.ShowTutorial_Iter();
+        {            
             yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
             DoorKnock.Knock(0);

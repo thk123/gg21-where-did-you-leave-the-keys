@@ -24,7 +24,7 @@ public class AudioSources : MonoBehaviour {
         GlassSound = GlassSoundSource;
         CeramicSound = CeramicSoundSource;
         TinSound = TinSoundSource;
-        TinSound = CutlerySoundSource;
+        CutlerySound = CutlerySoundSource;
 
     }
 

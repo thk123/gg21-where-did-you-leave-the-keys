@@ -27,7 +27,7 @@ public class KeySpawnSystem : MonoBehaviour
         if(NextKey != null && NextKey.transform.position.y < -10.0f)
         {
             // Respawn the key
-            GameObject.Destroy(NextKey);
+            GameObject.Destroy(NextKey.gameObject);
             NextKey = GameObject.Instantiate(KeyPrefab, LastSpawnPoint);
         }
     }

@@ -98,7 +98,6 @@ public class UIController : MonoBehaviour
 
     public void OnQuit_BtnClick()
     {
-        // TODO: main menu
-        Application.Quit();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -515,7 +515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9032133380649121228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 4848602731498992581}
   - component: {fileID: 5676263498333885831}
   m_Layer: 5
-  m_Name: Objectives
+  m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1126,12 +1126,12 @@ GameObject:
   - component: {fileID: 6358958566473965921}
   - component: {fileID: 2303634777983819124}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Objectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8551555282340475274
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1971,3 +1971,6 @@ MonoBehaviour:
     RootElement: {fileID: 2210222012193356885}
     Outcome: {fileID: 8748374936587209952}
     PeopleIn: {fileID: 4552891821461155048}
+  TutorialElements:
+    TextRoot: {fileID: 2303634777983819124}
+    InstructionsRoot: {fileID: 5953330568004620950}

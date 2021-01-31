@@ -37,6 +37,7 @@ public class GameState : MonoBehaviour
         yield return null;
         while (KeySpawnSystem.AnyMoreKeys)
         {
+            yield return UIController.ShowTutorial_Iter();
             yield return new WaitForSeconds(2.0f);
             KeySpawnSystem.SpawnNextKey();
             DoorKnock.Knock(0);

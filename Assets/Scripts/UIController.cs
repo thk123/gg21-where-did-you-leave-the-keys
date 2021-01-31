@@ -49,10 +49,10 @@ public class UIController : MonoBehaviour
         
     }
 
-    public void ShowSuccess(float timeTaken)
+    public IEnumerator ShowSuccess(float timeTaken)
     {
         SuccessElements.TimeTextBox.text = timeTaken.ToString(".0s");
-        StartCoroutine(ShowSuccess_Coroutine());
+        return ShowSuccess_Coroutine();
     }
 
     private IEnumerator ShowSuccess_Coroutine()

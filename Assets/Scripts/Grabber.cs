@@ -88,7 +88,8 @@ public class Grabber : MonoBehaviour
             if(!IsGrabbing())
             {
                 RaycastHit info;
-                lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                var midpoint = new Vector3(Screen.width / 2, Screen.height / 2, 0.0f);
+                lastRay = Camera.main.ScreenPointToRay(midpoint);
                 if (Physics.Raycast(lastRay, out info, MaxDistance, ~NoGrabLayer))
                //if (Physics.Raycast(lastRay, out info, MaxDistance))
               // Debug.Log(info.collider);
@@ -110,6 +111,7 @@ public class Grabber : MonoBehaviour
     private void Drop()
     {
         savedProps.Value.Restor(GrabbedItem);
+        GrabbedItem.GetComponent<Key>()?.SetProximityMute(false);
         GrabbedItem = null;
     }
 
@@ -124,6 +126,7 @@ public class Grabber : MonoBehaviour
         GrabbedItem.drag = 10.0f;
 
         itemToGrab.GetComponent<PickupableSFX>()?.PickUp();
+        itemToGrab.GetComponent<Key>()?.SetProximityMute(true);
     }
 
     bool IsGrabbing()

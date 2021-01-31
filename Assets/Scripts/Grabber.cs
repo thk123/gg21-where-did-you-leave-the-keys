@@ -38,6 +38,8 @@ public class Grabber : MonoBehaviour
     public AnimationCurve ForceCurve = AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 100.0f);
     public float GrabForceMuliplier = 1.0f;
 
+    public LayerMask NoGrabLayer;
+
     public Material HoldMaterial;
     // Start is called before the first frame update
     void Start()
@@ -87,7 +89,9 @@ public class Grabber : MonoBehaviour
             {
                 RaycastHit info;
                 lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(lastRay, out info, MaxDistance))
+                if (Physics.Raycast(lastRay, out info, MaxDistance, ~NoGrabLayer))
+               //if (Physics.Raycast(lastRay, out info, MaxDistance))
+              // Debug.Log(info.collider);
                 {
                     
                     if(info.rigidbody != null && info.collider.gameObject.tag != "NoGrab")

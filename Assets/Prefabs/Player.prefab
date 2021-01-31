@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 697839882877553291}
   - component: {fileID: 697839882877553290}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,6 +80,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   GrabForceMuliplier: 5
+  NoGrabLayer:
+    serializedVersion: 2
+    m_Bits: 8
   HoldMaterial: {fileID: 2100000, guid: 59b2f633ed8a2f047812e23af6365fd4, type: 2}
 --- !u!1 &697839884471050173
 GameObject:
@@ -95,7 +98,7 @@ GameObject:
   - component: {fileID: 697839884459797087}
   - component: {fileID: 697839883360667379}
   - component: {fileID: 697839883360667378}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +300,7 @@ GameObject:
   - component: {fileID: 697839884463047099}
   - component: {fileID: 697839884459797085}
   - component: {fileID: 697839884458772435}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -510,6 +513,10 @@ PrefabInstance:
     - target: {fileID: 7639658120522344060, guid: 564e34c9a4e30e84895904460a02d32e, type: 3}
       propertyPath: m_Name
       value: GameAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639658120522344060, guid: 564e34c9a4e30e84895904460a02d32e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 564e34c9a4e30e84895904460a02d32e, type: 3}

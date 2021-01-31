@@ -71,7 +71,6 @@ public class GameState : MonoBehaviour
         {            
             KeySpawnSystem.SpawnNextKey();
             AudioSource.PlayClipAtPoint(MotorbikeArrived, DoorKnock.transform.position);
-            yield return new WaitForSeconds(MotorbikeArrived.length + 0.5f);
             DoorKnock.Knock(0);
             float timeStartedKey = Time.time;
             yield return WaitUntil(() => DoorToUnlock.IsUnlocked, Timeout / 3.0f);
@@ -143,6 +142,7 @@ public class GameState : MonoBehaviour
         }
 
         yield return Fade.FadeToClear(1.0f);
+        yield return new WaitForSeconds(1.0f);
     }
 
     IEnumerator WaitUntil(Func<bool> condition, float timeout)

@@ -9,7 +9,7 @@ public enum AudioTypes {
     ceramic,
     tin,
     cutlery
-    }
+}
 
 public class ColliderSound : MonoBehaviour
 {
@@ -20,33 +20,11 @@ public class ColliderSound : MonoBehaviour
     private float WaitCount = 0f;
     bool AudioLoaded = false;
     // Start is called before the first frame update
-    void LoadMyAudio()
+    void Start()
     {
-
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        MyClip = AudioSources.GenericSound;
-
-        switch(AudioType) {
-            case AudioTypes.cardboard:
-                MyClip = AudioSources.CardboardSound;
-                break;
-            case AudioTypes.glass:
-                MyClip = AudioSources.GlassSound;
-                break;
-            case AudioTypes.tin:
-                MyClip = AudioSources.TinSound;
-                break;
-            case AudioTypes.ceramic:
-                MyClip = AudioSources.CeramicSound;
-                break;
-            case AudioTypes.cutlery:
-                MyClip = AudioSources.CutlerySound;
-                break;
-        }
-
-        audioSource.clip = MyClip;
-        AudioLoaded = true;
+        audioSource.clip = AudioSources.Instance.GetAudioClip(AudioType);
         
     }
 
@@ -54,7 +32,7 @@ public class ColliderSound : MonoBehaviour
         if (!AudioLoaded) {
             WaitCount += Time.deltaTime;
             if (WaitCount>=2f) {
-                LoadMyAudio();
+                AudioLoaded = true;
             }
         }
     }
